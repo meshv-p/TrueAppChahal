@@ -1,0 +1,4 @@
+node_modules
+ec2.pem
+cron.*
+*.zip
