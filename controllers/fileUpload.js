@@ -49,10 +49,14 @@ const readFile = async (req, res) => {
     console.log(csvFilePath, "csvFilePath");
 
     const page = parseInt(req.query.page) || 1;
+    const offset = parseInt(req.query.offset) || 10;
     console.log(page, "page");
-    const itemsPerPage = 100;
+
+    const itemsPerPage = offset;
+
     const startIndex = (page - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
+
     console.log(endIndex, "edIdx");
     const pageData = [];
 
@@ -72,7 +76,7 @@ const readFile = async (req, res) => {
       })
       .on("end", () => {
         const totalPages = Math.ceil(pageData.length / itemsPerPage);
-        console.log(totalPages, pageData, itemsPerPage, "tt");
+        // console.log(totalPages, pageData, itemsPerPage, "tt");
 
         if (page < 1 || page > totalPages) {
           return res.status(400).json({ error: "Invalid page number." });
